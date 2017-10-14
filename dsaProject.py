@@ -301,69 +301,74 @@ def main():
 	c=int(input('Select Your Train\n'))-1
 
 	Train[c].intro()
-	k=int(input('Choose Your Module:\n\n1.Passenger Module\n2.Administrative Module\n'))
+	while 1:
 
-	if k==1:
+		k=int(input('Choose Your Module:\n\n1.Passenger Module\n2.Administrative Module\n3.Exit\n'))
 
-		while 1:
+		if k==1:
 
-			s=int(input('Enter the starting station.no:	'))
-			e=int(input('Enter the ending station.no:	'))
+			while 1:
 
-			h=-1
+				s=int(input('Enter the starting station.no:	'))
+				e=int(input('Enter the ending station.no:	'))
 
-			t=Train[c].Time(s-1,e-1)
-			d=Train[c].Distance(s-1,e-1)
-			m=t%60
-			h=int(t/60)
+				h=-1
 
-			if h>0:
-				print('The Train takes ',h,' Hours ',m,' Minutes, ',d,'kms\n')
-			else:
-				print('The Train takes ',m,' Minutes, ',d,'kms\n')
-			p=0
-			p=int(input('Do you want to take a ticket and exit the Passenger Module?\n1.Yes\n2.No\n'))
-			if p==1:
-				f=int(input('Enter number of people:'))
-				r=(0.5*d)+(0.90*t)
-				print('**********************************\n')
-				print('Starting point:	',Train[c].Stops[s-1])
-				print('Ending point:	',Train[c].Stops[e-1],'\n\n')
-				print('Your intermediate stations:')
-				for i in range(s-1,e-1):
-					print(Train[c].Stops[i])
-				print('Bill:			Rs.',r)
-				print('**********************************\n\n')
-				print('Thank You for using the South Western Railways\n\n***** Have a Happy Journey *****\n')
+				t=Train[c].Time(s-1,e-1)
+				d=Train[c].Distance(s-1,e-1)
+				m=t%60
+				h=int(t/60)
 
-				break
+				if h>0:
+					print('The Train takes ',h,' Hours ',m,' Minutes, ',d,'kms\n')
+				else:
+					print('The Train takes ',m,' Minutes, ',d,'kms\n')
+				p=0
+				p=int(input('Do you want to take a ticket and exit the Passenger Module?\n1.Yes\n2.No\n'))
+				if p==1:
+					f=int(input('Enter number of people:'))
+					r=(0.5*d)+(0.90*t)
+					print('**********************************\n')
+					print('Starting point:	',Train[c].Stops[s-1])
+					print('Ending point:	',Train[c].Stops[e-1],'\n\n')
+					print('Your intermediate stations:\n')
+					for i in range(s-1,e-1):
+						print(Train[c].Stops[i])
+					print('\nBill:			Rs.',r)
+					print('\n**********************************\n\n')
+					print('Thank You for using the South Western Railways\n\n***** Have a Happy Journey *****\n')
 
-	if k==2:
+					break
 
-		while 1:
+		elif k==2:
 
-			p=int(input('Choose your operation:\n1.Update delay timings at a station\n2.Change a stop'))
-			if p==1:
+			while 1:
 
-				s=int(input('enter the station number'))
-				u=int(input('enter the new travel time'))
-				Train[c].upTime(s-1,u)
+				p=int(input('\nChoose your operation:\n1.Update delay timings at a station\n2.Change a stop\n'))
+				if p==1:
 
-			if p==2:
+					s=int(input('enter the station number'))
+					u=int(input('enter the new travel time'))
+					Train[c].upTime(s-1,u)
 
-				s=int(input('enter the station number'))
-				na=input('enter new station name')
-				di=int(input('enter new station distance'))
-				u=int(input('enter the new travel time'))
-				Train[c].Stops[s-1]=na
-				Train[c].upDistance(s-1,di)
-				Train[c].upTime(s-1,u)
+				if p==2:
 
-			t=int(input('Do you still want to continue in the Administrative Module:\n1.Yes\n2.No\n'))
+					s=int(input('enter the station number:	'))
+					na=input('enter new station name:	')
+					di=int(input('enter new station distance:	'))
+					u=int(input('enter the new travel time:	'))
+					Train[c].Stops[s-1]=na
+					Train[c].upDistance(s-1,di)
+					Train[c].upTime(s-1,u)
 
-			if t==2:
-				print('***South Western Railway zone offers sincere regards for your service***\n\n        Have a nice Day...!!!!')
-				break
+				t=int(input('\nDo you still want to continue in the Administrative Module:\n1.Yes\n2.No\n'))
+
+				if t==2:
+					print('\n***South Western Railway zone offers sincere regards for your service***\n\n        Have a nice Day...!!!!')
+					break
+		elif k==3:
+			break
+
 
 
 if __name__ == '__main__':
