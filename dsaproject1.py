@@ -376,7 +376,7 @@ def main():
 
 
 				s=int(input('\nEnter the boarding station.no:	'))
-				e=int(input('Enter the destination station.no:	'))
+				e=int(input('\nEnter the destination station.no:	'))
 
 				h=-1
 
@@ -460,10 +460,10 @@ def main():
 					na=input('enter new station name:		')
 
 					di=int(input('\nenter distance to be travelled to reach the new station:		'))
-					de=int(input('enter distance to be travelled from new station to next station:	'))
+					de=int(input('\nenter distance to be travelled from new station to next station:	'))
 
 					u=int(input('\nenter time to be travelled to reach the new station (in mins):		'))
-					v=int(input('enter time to be travelled from new station to next station(in mins):	'))
+					v=int(input('\nenter time to be travelled from new station to next station(in mins):	'))
 
 					Train[c].Stops[s-1]=na
 
