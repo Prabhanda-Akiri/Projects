@@ -87,7 +87,7 @@ class SegmentTree:
 					if t!=None:
 						t.val=t.right.val+t.left.val
 
-				t=self.sear(self.root,i,j)
+				"""t=self.sear(self.root,i,j)
 
 				if t!=None:
 					t.val=t.right.val+t.left.val
@@ -98,7 +98,7 @@ class SegmentTree:
 
 				if t!=None:
 
-					t.val=t.right.val+t.left.val
+					t.val=t.right.val+t.left.val"""
 
 	def traversal(self,x):			
 										#enables us to verify if the values are managed properly in the tree
