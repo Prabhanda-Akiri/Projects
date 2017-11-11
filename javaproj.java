@@ -1,9 +1,6 @@
 import java.util.Scanner;
 
-import ProjectUser.*;
-
-import ProjectAdmin.*;
-
+import Project.*;
 
 
 public class javaproj
@@ -19,25 +16,29 @@ public class javaproj
 
 		System.out.println("-->1.User Module\n-->2.Administrative Module\n-->3.Exit\n");
 
-		System.out.println("Choose Your Module..\n");
-
 		int ModuleSelection;
 
 		while(2>1)
-		{
-			ModuleSelection=in.nextInt();
 
-			if(ModuleSelection<1 || ModuleSelection>3)
-				System.out.println("\nChoose your Module properly..");
-			else
-				break;
-		}
-
-		if(ModuleSelection==1)
 		{
+
+			System.out.println("Choose Your Module..\n");		
+
+			while(2>1)
+			{
+				ModuleSelection=in.nextInt();
+
+				if(ModuleSelection<1 || ModuleSelection>3)
+					System.out.println("\nChoose your Module properly..");
+				else
+					break;
+			}
+
+			if(ModuleSelection==1)
+			{
 			System.out.println("\n\nWelcome to the User-Module..!!\n");
 
-			ProjectUser.UserModule user=new ProjectUser.UserModule();
+			Project.UserModule user=new Project.UserModule();
 
 			System.out.println("1.Not yet Registered??	Make an account and start enjoying the services of SPICE JET....\n");
 			System.out.println("2.Already a member of the SPICE JET family??	Login and check the flight details..\n");
@@ -107,7 +108,7 @@ public class javaproj
 
 					else if(UserServices==3)
 					{
-						user.FlightDetails();
+						user.FlightDetail();
 						
 					}
 
@@ -153,13 +154,13 @@ public class javaproj
 
 			}
 
-		}
+			}
 
-		if(ModuleSelection==2)
-		{
+			else if(ModuleSelection==2)
+			{
 			System.out.println("\n\nWelcome to the Administrative Module...!!");
 
-			ProjectAdmin.AdminModule admin=new ProjectAdmin.AdminModule();
+			Project.AdminModule admin=new Project.AdminModule();
 
 			System.out.println("To continue in the Admin module you must Login for the secure management of the SPICE JET Airlines..");
 
@@ -204,8 +205,8 @@ public class javaproj
 					System.out.println("Here are the services provided to your Module..\n");
 				while(2>1)
 				{	
-					System.out.println("\n1.Introduce a new Airline\n2.Change fares of Airlines\n3.Stop the services of certain Airline");
-					System.out.println("4.Check daily Transactions\n5.Logout and Exit the Administrative Module\n");
+					System.out.println("\n1.Introduce a new Airline\n2.Change fares of Airlines");
+					System.out.println("3.Check daily Transactions\n4.Logout and Exit the Administrative Module\n");
 
 					int AdminService;
 
@@ -237,17 +238,11 @@ public class javaproj
 
 					else if(AdminService==3)
 					{
-						admin.StopAirline();
-						System.out.println("Your changes are Updated..!!!\n");
-					}
-
-					else if(AdminService==4)
-					{
 						admin.DailyTransaction();
 						System.out.println("Your changes are Updated..!!!\n");
 					}
 
-					else if(AdminService==5)
+					else if(AdminService==4)
 					{
 						admin.LogoutAccount();
 						System.out.println("    SPICE JET offers sincere regards to your Services    \n");
@@ -261,7 +256,7 @@ public class javaproj
 
 				else if(AdminLogin==false)
 				{
-					System.out.println("Sorry..!!\nWe couldn't log you in to the account chosen\nHere are the alternate options we could provide\n");
+					System.out.println("\nWe couldn't log you in to the account chosen\nHere are the alternate options we could provide\n");
 					System.out.println("1.Forgot password??	Change your password");
 					System.out.println("2.In case you are not the user of the accout you tried to login,Create a new account\n");
 					System.out.println("Choose your option..");
@@ -289,10 +284,16 @@ public class javaproj
 				}
 			}
 
+			}
+
+			else
+			{
+				System.out.println("\n\n	Have a Nice Day..!!\n\n");
+				break;
+			}
+			
 		}
 
-		else
-			System.out.println("\n\n	Have a Nice Day..!!\n\n");
 
 		System.out.println("\n\n	SPICE JET  ---	Fastest and Safest....!!!!\n\n");
 	}
