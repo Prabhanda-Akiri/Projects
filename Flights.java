@@ -1,4 +1,5 @@
 package ProjectFlight;
+import java.util.Scanner;
 
 class Flight
 {
@@ -23,9 +24,12 @@ class Flight
 public class Flights
 {	
 	int number=5;
+	double transaction=0;
 	int i;
 
 	Flight Fls=new Flight[20];
+
+	Scanner in=new Scanner(System.in);
 
 	public void Menu()
 	{
@@ -40,13 +44,51 @@ public class Flights
 	public void show()
 	{
 		System.out.println("S.No	Flight.No	Boarding-Point	Destination-Point	Dept-Time	Arr-Time	Fare");
-		for(i=0;i<5;i++)
+		for(i=0;i<number;i++)
 		{
 			System.out.print(i+".	"+Fls[i].FlightNumber+"	"+Fls[i].Boarding+"	"+Fls[i].Destination+"	"+Fls[i].DepTime)
 			System.out.println("	"+Fls[i].ArrTime+"	"+Fls[i].Fare);
 		}
 	}
 
-	
+	public void Add()
+	{
+		System.out.println("Here are the Flight Details:\n");
+		show();
+
+		System.out.print("\nEnter the flight number:	");
+		int fno=in.nextInt();
+
+		System.out.print("\nBoarding-point:	");
+		String b=in.next();
+
+		System.out.print("\nDestination-point:	");
+		String d=in.next();
+
+		System.out.print("\nDeparture-time:	");
+		double dt=in.nextDouble();
+
+		System.out.print("\nArrival-time:	");
+		double at=in.nextDouble();
+
+		System.out.print("\nEnter the Fare:	");
+		double fare=in.nextDouble();
+
+		number=number+1;
+		Fls[number-1]=new Flight(b,d,fno,dt,at,fare)
+
+		System.out.print("\n\nYour Details are added to the new Airline...!!!\n");
+
+		show();
+
+	}
+
+
+	public void Delete()
+	{
+		System.out.print("hi");
+
+	}
+
 
 }
