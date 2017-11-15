@@ -8,13 +8,13 @@ public class javaproj
 	public static void main(String[] args)
 	{
 		
+		double Transaction=0,a;
+
 		Scanner in=new Scanner(System.in);
 
 		System.out.println("\n\n	****************************WELCOME TO SPICE JET AIRWAYS...!!!****************************\n\n");
 
 		System.out.println("	Here are the modules we offer to provide the safe and secure management of the information..\n\n");
-
-		System.out.println("-->1.User Module\n-->2.Administrative Module\n-->3.Exit\n");
 
 		int ModuleSelection;
 
@@ -22,8 +22,9 @@ public class javaproj
 
 		{
 
-			System.out.println("Choose Your Module..\n");		
-
+			System.out.println("Choose Your Module..\n");
+			System.out.println("\n\n-->1.User Module\n-->2.Administrative Module\n-->3.Exit\n");
+		
 			while(2>1)
 			{
 				ModuleSelection=in.nextInt();
@@ -67,7 +68,7 @@ public class javaproj
 
 			if(UserStatus==2)
 			{
-				System.out.println("To continue in the Registered User-Module you must login to your account..");
+				System.out.println("\n\nTo continue in the Registered User-Module you must login to your account..");
 
 				boolean LoginDetails;
 				LoginDetails=user.LoginAccount();
@@ -96,13 +97,15 @@ public class javaproj
 
 					if(UserServices==1)
 					{
-						user.BookTickets();
-						
+						a=user.BookTickets();
+						Transaction=Transaction+a;
+
 					}
 
 					else if(UserServices==2)
 					{
-						user.CancelTickets();
+						a=user.CancelTickets();
+						Transaction=Transaction-a;
 						
 					}
 
@@ -238,10 +241,9 @@ public class javaproj
 
 					else if(AdminService==3)
 					{
-						admin.DailyTransaction();
-						System.out.println("Your changes are Updated..!!!\n");
-					}
+						System.out.println("Daily Transactions for the SPICE JET today are:	Rs."+Transaction+"/- only....!!!!");
 
+					}
 					else if(AdminService==4)
 					{
 						admin.LogoutAccount();
