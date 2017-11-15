@@ -1,3 +1,4 @@
+
 package Project;
 import java.util.Scanner;
 
@@ -19,18 +20,20 @@ abstract class AdminAccount implements Admin
 	String FirstName,LastName;
 	String PhoneNo;
 	String email;
-	String UserName,Password;
+	String UserName="student",Password="student";
 	
 	Scanner in=new Scanner(System.in);
 	Scanner s=new Scanner(System.in);
+
+
 	public boolean CreateAccount()
 	{
 		int n;
 		System.out.println("PLEASE ENTER YOUR VALID DETAILS TO CREATE AN ACCOUNT .......\n\n");
-		System.out.print("FIRST NAME: ");
+		System.out.print("FIRST NAME: 		");
 		FirstName=s.next();
 
-		System.out.print("LAST NAME: ");
+		System.out.print("LAST NAME: 		");
 		LastName=s.next();
 		System.out.println("\n");
 		try
@@ -53,7 +56,7 @@ abstract class AdminAccount implements Admin
 
 		finally
 		{
-			System.out.print("EMAIL ID : ");
+			System.out.print("EMAIL ID : 		");
 			email=s.next();
 			System.out.println("\n");
 
@@ -68,6 +71,7 @@ abstract class AdminAccount implements Admin
 			System.out.println("CONGRAGULATIONS!!!!.......YOUR ACCOUNT HAS BEEN SUCCESSFULLY CREATED\n\n");
 			System.out.print("Do u want to continue?\n Please enter (1 for YES/2 for NO):");
 			n=s.nextInt();
+
 			if(n==1)
 				return true;
 			else
@@ -162,11 +166,12 @@ abstract class AdminAccount implements Admin
 
 abstract class AdminAbstract extends AdminAccount
 {
+	Flights1 ob=new Flights1();
+
 	public void AddAirline()
 	{
-		Flights1 F1=new Flights1();
 
-		F1.Add();
+		ob.Add();
 
 	}
 
@@ -176,14 +181,15 @@ public class AdminModule extends AdminAbstract
 {
 	public void ChangeFare()
 	{
-		Flights1 ob=new Flights1();
-
+		
 		System.out.println("Here are the details of the Flights provided");
-		ob.show();
+		ob.show(ob);
 
 		Scanner in=new Scanner(System.in);
 		System.out.println("Choose the Flight to change the Fare..\n");
 		int n=in.nextInt();
+		n=n-1;
+
 		System.out.println("Enter your new Fare..\n");
 		double f=in.nextDouble();
 
@@ -191,12 +197,11 @@ public class AdminModule extends AdminAbstract
 
 		System.out.println("Your New fare is updated\n");
 
-		ob.show();
+		ob.show(ob);
 	}
 
 	public void DailyTransaction()
 	{
-		Flights1 ob=new Flights1();
 
 		System.out.println("Todays Daily Transactions are\n"+"						Rs."+ob.transaction+"/- only....");
 	}
@@ -242,52 +247,53 @@ class Flights1
 	public void Menu()
 	{
 		
-		Fls[0]=new  Flight1("Mumbai","Delhi",73521,3.40,5.20,6030.70);
-		Fls[1]=new  Flight1("Bangalore","Chennai",56372,8.30,10.05,5372.50);
-		Fls[2]=new  Flight1("Hyderabad","Vishakapatnam",23094,2.40,4.50,3956.40);
-		Fls[3]=new  Flight1("Kolkata","Hyderabad",56321,14.50,16.20,5986.10);
-		Fls[4]=new  Flight1("Kashmir","Delhi",83562,17.48,18.35,3564.70);		
+		Fls[0]=new  Flight1("	Mumbai","	Delhi		",73521,3.45,5.28,6030.70);
+		Fls[1]=new  Flight1("	Bangalore","Chennai		",56372,8.37,10.05,5372.50);
+		Fls[2]=new  Flight1("	Hyderabad","Vizag		",23094,2.42,4.57,3956.40);
+		Fls[3]=new  Flight1("	Kolkata","	Hyderabad	",56321,14.51,16.26,5986.10);
+		Fls[4]=new  Flight1("	Kashmir","	Delhi		",83562,17.48,18.35,3564.70);
 	}
 
-	public void show()
+	public void show(Flights1 ob)
 	{
-		System.out.println("S.No	Flight.No	Boarding-Point	Destination-Point	Dept-Time	Arr-Time	Fare");
-		for(i=0;i<number;i++)
+		System.out.println("S.No	Flight.No	Boarding-Point	Destination-Point	Dept-Time	Arr-Time	Fare\n\n");
+		for(i=0;i<ob.number;i++)
 		{
-			System.out.print(i+".	"+Fls[i].FlightNumber+"	"+Fls[i].Boarding+"	"+Fls[i].Destination+"	"+Fls[i].DepTime);
-			System.out.println("	"+Fls[i].ArrTime+"	"+Fls[i].Fare);
+			System.out.print(i+1+".	"+Fls[i].FlightNumber+"	"+Fls[i].Boarding+"	"+Fls[i].Destination+"	"+Fls[i].DepTime);
+			System.out.println("		"+Fls[i].ArrTime+"		"+Fls[i].Fare);
 		}
 	}
 
 	public void Add()
 	{
 		System.out.println("Here are the Flight Details:\n");
-		show();
+		show(this);
 
 		System.out.print("\nEnter the 5-digit flight number:	");
 		int fno=in.nextInt();
 
-		System.out.print("\nBoarding-point:	");
+		System.out.print("\n\nBoarding-point:		");
 		String b=in.next();
+		b="	"+b;
 
 		System.out.print("\nDestination-point:	");
 		String d=in.next();
+		d="	"+d+"		";
 
-		System.out.print("\nDeparture-time(in 24-hr format):	");
+		System.out.print("\n\nDeparture-time(in 24-hr format):	");
 		double dt=in.nextDouble();
 
-		System.out.print("\nArrival-time(in 24-hr format):	");
+		System.out.print("\nArrival-time(in 24-hr format):		");
 		double at=in.nextDouble();
 
-		System.out.print("\nEnter the Fare(in Rupees):	");
+		System.out.print("\n\nEnter the Fare(in Rupees):	");
 		double fare=in.nextDouble();
 
+		Fls[number]=new  Flight1(b,d,fno,dt,at,fare);
 		number=number+1;
-		Fls[number-1]=new  Flight1(b,d,fno,dt,at,fare);
-
 		System.out.print("\n\nYour Details are added to the new Airline...!!!\n");
 
-		show();
+		show(this);
 
 	}
 
