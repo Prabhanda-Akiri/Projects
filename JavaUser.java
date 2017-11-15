@@ -7,10 +7,10 @@ interface User
 	public boolean CreateAccount();
 	public boolean LoginAccount();
 
-	public void BookTickets();
+	public double BookTickets();
 	public void ChangePassword();
 
-	public void CancelTickets();
+	public double CancelTickets();
 	public void FlightDetail();
 	public void LogoutAccount();
 }
@@ -20,7 +20,7 @@ abstract class UserAbstract implements User
 	String FirstName,LastName;
 	String PhoneNo;
 	String email;
-	String UserName,Password;
+	String UserName="student",Password="student";
 	boolean BookingStatus;
 	int Passengers=0;
 
@@ -70,7 +70,7 @@ abstract class UserAbstract implements User
 			System.out.println("\n");
 
 			System.out.println("CONGRAGULATIONS!!!!.......YOUR ACCOUNT HAS BEEN SUCCESSFULLY CREATED\n\n");
-			System.out.print("Do u want to continue?\n Please enter (1 for YES/2 for NO):");
+			System.out.print("Do u want to continue?\n\nPlease enter (1 for YES/2 for NO):");
 			n=s.nextInt();
 			if(n==1)
 				return true;
@@ -88,9 +88,9 @@ abstract class UserAbstract implements User
 		
 		while(i<=2)
 		{
-			System.out.print("ENTER THE USERNAME: ");
+			System.out.print("\nENTER THE USERNAME: ");
 			name=s.next();
-			System.out.println("\n\n");
+			System.out.println("\n");
 			System.out.print("ENTER THE PASSWORD: ");
 			pwd=s.next();
 			if(name.equals(UserName) && pwd.equals(Password))
@@ -117,9 +117,9 @@ abstract class UserAbstract implements User
      	int t1=2;
      	int t2=3;
      
-    	System.out.println("Your password must contain minimum 8 characters");
-    	System.out.println("Atleast one character must be numeric");
-    	System.out.println("Enter your new password:");
+    	System.out.println("\nYour password must contain minimum 8 characters");
+    	System.out.println("\nAtleast one character must be numeric");
+    	System.out.println("\nEnter your new password:");
      
      	while(t1>1)
      	{
@@ -130,7 +130,7 @@ abstract class UserAbstract implements User
   			if(length>=8)
   			{
   
-     			System.out.println("Re-enter your password:");
+     			System.out.println("\nRe-enter your password:");
       			Passwd2=in.nextLine();
       			while(t2>1)
       			{
@@ -163,22 +163,23 @@ public class UserModule extends UserAbstract
 
 {
 
-	public void BookTickets()
+	public double BookTickets()
 	{
 		Flights flight=new Flights();
 
-		System.out.println("These are the Flights Offered by the SPICE JET\nDetails are also provided\n");
+		System.out.println("\nThese are the Flights Offered by the SPICE JET\n\nDetails are also provided\n");
 		flight.show();
 
 		System.out.println("\nChoose a Flight(S.No):");
 		int no=in.nextInt();
+		no=no-1;
 
-		System.out.print("Enter the number of passengers:	");
+		System.out.print("\nEnter the number of passengers:	");
 		int p=in.nextInt();
 
 		BookingStatus=true;
 		flight.transaction=p*flight.Fls[no].Fare+flight.transaction;
-		Passengers=Passengers+1;
+		Passengers=Passengers+p;
 
 		System.out.println("Here is your Ticket:	\n");
 
@@ -192,38 +193,40 @@ public class UserModule extends UserAbstract
 		System.out.println("		Departure Time:		"+flight.Fls[no].DepTime);
 		System.out.println("		Arrival Time:		"+flight.Fls[no].ArrTime+"\n\n");
 		System.out.println("		Total Fare:			Rs."+p*flight.Fls[no].Fare+"/- only\n\n");
-		System.out.println("						-----HAVE A HAPPY JOURNEY-----\n\n");
+		System.out.println("				-----HAVE A HAPPY JOURNEY-----\n\n");
 		System.out.println("		*******************************************************************\n\n");
 		System.out.println("	------------------------------------------------------------------------------\n\n");
 
 
+		return flight.transaction;
 	}
 
-	public void CancelTickets()
+	public double CancelTickets()
 	{
 		String dec;
     	int p;
     	int num;
     	double amount;
         
-  		System.out.println("Do you want to cancel the ticket for sure?");
-  		System.out.println("Enter \"yes\" to cancel the tickets or \"no\" to return ");
+  		System.out.println("\nDo you want to cancel the ticket for sure?\n");
+  		System.out.println("\nEnter \"yes\" to cancel the tickets or \"no\" to return ");
   
   		dec=in.next();
 
   		if(dec.equals("yes"))
   		{
       
-      		System.out.println("Details of flights:");
+      		System.out.println("\nDetails of flights:\n\n");
         
             Flights obj=new Flights();
             obj.show();
         
-            System.out.println("Select the serial number of flight for which tickets are to be cancelled: ");
+            System.out.print("\nSelect the serial number of flight for which tickets are to be cancelled: ");
             num=in.nextInt();
+            num=num-1;
             
-      		System.out.println("Your ticket has"+Passengers+" passengers");
-      		System.out.println("Enter the no.of passengers tickets to be cancelled:");
+      		System.out.println("\n\nYour ticket has  "+Passengers+" passengers");
+      		System.out.print("\n\nEnter the no.of passengers tickets to be cancelled:");
       
       		p=in.nextInt();
 
@@ -234,13 +237,17 @@ public class UserModule extends UserAbstract
       		amount=obj.Fls[num].Fare*p;
       		obj.transaction=obj.transaction-amount;
       
-      		System.out.println("Your tickets are cancelled successfully ");
-      		System.out.println("Rupees."+amount+" will be refunded into your account");
+      		System.out.println("\nYour tickets are cancelled successfully ");
+      		System.out.println("\nRupees."+amount+"/- will be refunded into your account\n");
+
+      		return amount;
   		}
 
   		else
   		{
-      		System.out.println("Your tickets are not cancelled");
+      		System.out.println("\nYour tickets are not cancelled\n");
+
+      		return 0.00;
   		}
 	}
 
@@ -299,11 +306,11 @@ class Flights
 	public void Menu()
 	{
 		
-		Fls[0]=new  Flight("	Mumbai","		Delhi",73521,3.40,5.20,6030.70);
-		Fls[1]=new  Flight("	Bangalore","	Chennai",56372,8.30,10.05,5372.50);
-		Fls[2]=new  Flight("	Hyderabad","	Vishakapatnam",23094,2.40,4.50,3956.40);
-		Fls[3]=new  Flight("	Kolkata","		Hyderabad",56321,14.50,16.20,5986.10);
-		Fls[4]=new  Flight("	Kashmir","		Delhi",83562,17.48,18.35,3564.70);		
+		Fls[0]=new  Flight("	Mumbai","	Delhi		",73521,3.45,5.28,6030.70);
+		Fls[1]=new  Flight("	Bangalore","Chennai		",56372,8.37,10.05,5372.50);
+		Fls[2]=new  Flight("	Hyderabad","Vizag		",23094,2.42,4.57,3956.40);
+		Fls[3]=new  Flight("	Kolkata","	Hyderabad	",56321,14.51,16.26,5986.10);
+		Fls[4]=new  Flight("	Kashmir","	Delhi		",83562,17.48,18.35,3564.70);
 	}
 
 	public void show()
@@ -311,8 +318,8 @@ class Flights
 		System.out.println("S.No	Flight.No	Boarding-Point	Destination-Point	Dept-Time	Arr-Time	Fare");
 		for(i=0;i<number;i++)
 		{
-			System.out.print(i+".	"+Fls[i].FlightNumber+"	"+Fls[i].Boarding+"	"+Fls[i].Destination+"	"+Fls[i].DepTime);
-			System.out.println("	"+Fls[i].ArrTime+"	"+Fls[i].Fare);
+			System.out.print(i+1+".	"+Fls[i].FlightNumber+"	"+Fls[i].Boarding+"	"+Fls[i].Destination+"	"+Fls[i].DepTime);
+			System.out.println("		"+Fls[i].ArrTime+"		"+Fls[i].Fare);
 		}
 	}
 
